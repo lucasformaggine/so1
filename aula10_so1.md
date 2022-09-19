@@ -32,7 +32,7 @@ up(B);                     up(A);
 up(A);                     up(B);
 ```
 
-- No exemplo acima, embora ambos cnsigam fazer o primeiro down, o segundo down é impossibilitado pelo semáforo estar zerado; como ambos ficam no down aguardando o up do outro, ocorre um deadlock
+- No exemplo acima, embora ambos consigam fazer o primeiro down, o segundo down é impossibilitado pelo semáforo estar zerado; como ambos ficam no down aguardando o up do outro, ocorre um deadlock
 - Deadlock ocorre quando:
     - Processos(threads) competem por acesso a recursos limitados
     - A sincronização de processos não está programada corretamente
@@ -45,16 +45,26 @@ up(A);                     up(B);
     - *foto 10-2*
 - Quatro condições para ocorrer o deadlock
     1) Exclusão mútua no acesso ao recurso
-    2) Hold and wait: um processo está acessando um recurso e está esperando para acessar outro recurso que está sendo acessado por um outro processo
+
+    2) Hold and wait: um processo está acessando um recurso e está esperando para 
+    acessar outro recurso que está sendo acessado por um outro processo
+
     3) Não preempção do recurso: o recurso só é liberado voluntariamente pelo processo
+
     4) Espera circular
 - Quatro abordagens para o deadlock:
     1)  Não fazer nada de forma automática, supondo que a possibiliade de ocorrência seja baixa. Caso pareça que haja deadlock, se faz uma intervenção manual
+
     2) Prevenção: eliminar alguma das 4 condições necessárias ao deadlock
-    2.1) Solução possível: amostras de recurso, porém de forma virtualizada. O processo tiliza um recurso virtualizado achando que está usando o recurso verdadeiro. Ex: spooler de impressão
-    2.2) Eliminar o hold and wait. Solução: um processo só pode pedir recursos quando não está utilizando nenhum e precisa pegar os recursos todos de uma vez. Isso não ocorrerá em todos os SOs; nesse caso, é necessário implementar uma primitiva que "teste o down" para ver se haverá o bloqueio ou não para não fazer um down que possa gerar deadlock, testando de tempo em tempo a possibilidade de fazê-lo. Crítica: pode ser ineficiente no uso dos recursos: um recurso alocado a um processo pode gastar um tempo razoável sem ser utilizado
-    2.3) Eliminar a não preempção do recurso: só pode ser usado se existir um mecanismo de preservação/restauração do estado do recurso. Ex: a impressora não poderia "parar" uma impressão, realizar outra e retornar para a primeira
-    2.4) Eliminar a espera circular. Solução: atribuo um número a cada tipo de recurso. Cada processo só pode acessar os recursos na ordem numérica. Pensando em uma estrutura "circular", o último processo (que fecharia o ciclo) não pegaria os recursos no mesmo sentido; a inversão de ordem impede o deadlock.
+
+        2.1) Solução possível: amostras de recurso, porém de forma virtualizada. O processo tiliza um recurso virtualizado achando que está usando o recurso verdadeiro. Ex: spooler de impressão
+
+        2.2) Eliminar o hold and wait. Solução: um processo só pode pedir recursos quando não está utilizando nenhum e precisa pegar os recursos todos de uma vez. Isso não ocorrerá em todos os SOs; nesse caso, é necessário implementar uma primitiva que "teste o down" para ver se haverá o bloqueio ou não para não fazer um down que possa gerar deadlock, testando de tempo em tempo a possibilidade de fazê-lo. Crítica: pode ser ineficiente no uso dos recursos: um recurso alocado a um processo pode gastar um tempo razoável sem ser utilizado
+
+        2.3) Eliminar a não preempção do recurso: só pode ser usado se existir um mecanismo de preservação/restauração do estado do recurso. Ex: a impressora não poderia "parar" uma impressão, realizar outra e retornar para a primeira
+
+        2.4) Eliminar a espera circular. Solução: atribuo um número a cada tipo de recurso. Cada processo só pode acessar os recursos na ordem numérica. Pensando em uma estrutura "circular", o último processo (que fecharia o ciclo) não pegaria os recursos no mesmo sentido; a inversão de ordem impede o deadlock.
+
     3) Evitar deadlocks: controle de concessão do recurso. O SO apenas deve permitir a alocação quando esta for segura.
         - Estado seguro: existe uma sequência em que todos os processos terminam sem que ocorra deadlock
         - Para que o SO implemente o algoritmo de concessão de recursos, o processo informa previamente a quantidade total de recursos de cada tipo que ele vai precisar
@@ -111,8 +121,6 @@ up(A);                     up(B);
                     work = disponivel();
                     while (1):
                         encontre_processo_que_nao_tenha_terminado();
-
-
                 ```
 
     
