@@ -1,4 +1,4 @@
-# Aula 11 - Sistemas Operacionais I
+# Aula 13 - Sistemas Operacionais I
 
 ## Resumo da última aula
 
@@ -18,9 +18,9 @@
         - Aula de hoje: Round Robin
 
 ## Round Robin
-- Cada processo/thread tem um tempo máximo de execução cintínua (time slice ou quantum)
+- Cada processo/thread tem um tempo máximo de execução contínua (time slice ou quantum)
 - Duração do time slice:
-    - Muito longo: se assemelha ao FIFo
+    - Muito longo: se assemelha ao FIFO
     - Muito curto: multiplica-se
 - Ex: comparação FIFO VS. Round Robin
     - 5 processos, que começaram nos tempos:
@@ -29,7 +29,7 @@
         - P3: 2
         - P4: 3
         - P5: 4
-    - Suponha quet odos os processos tem um tempo de execução de 5
+    - Suponha que todos os processos tem um tempo de execução de 5
     - Time slice: 1
 
 - Round Robin:
@@ -76,7 +76,7 @@ Média: 13
     
 
     |Processo    |  0 - 10  | 10 - 20 | 20 - 110 | 110 - 210 |
-    |------------|----------|         |          |           |
+    |------------|----------|---------|----------|-----------|
     |I/O Bound   |    x     |         |          |           |
     |CPU Bound 1 |          |     x   |    x     |           |
     |CPU Bound 2 |          |         |          |    x      |
@@ -91,7 +91,7 @@ Média: 13
 - A) Múltiplas filas de processos prontos
     - Cada processo/thread entra na fila para cada prioridade. O SO vai lendo, de forma FIFO, os processos de maior priodade. Ao acabar, ele vai descendo para as prioridades menores. No entanto, se algum processo com maior prioridade entrar na fila, ele para o que está fazendo e volta à executar um processo mais prioritário
 
-- *foto14-1*
+- *foto13-1*
 
 - B) Escalonamento de loteria
     - Cada processo/thread recebe uma quantidade de bilhetes de acordo com a prioridade. Em seguida,
